@@ -12,8 +12,9 @@ function choosePassLength() {
   }
 }
 
-//confirming which characters to allow and then storing true or false values in the object called characterTypes
+//confirm which characters to allow and then store true or false values in the object called characterTypes
 function chooseCharacterTypes() {
+  //while loop will run until at least one set of characters is chosen
   while (true) {
     var types = {
       hasLowerCase: confirm("Would you like to include lowercase characters?"),
@@ -33,7 +34,7 @@ function chooseCharacterTypes() {
 
 //generate password
 function generatePassword(passLength, characterTypes) {
-  //make arrays with possible values 
+  //make strings with possible values 
   var lowerCase = "abcdefghijklmnopqrstuvwxyz"
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var numeric = "0123456789"
@@ -53,7 +54,7 @@ function generatePassword(passLength, characterTypes) {
   if (characterTypes.hasSpecial) {
     allowedCharacters = allowedCharacters.concat(special)
   }
-
+  //make var to store password as it is built with for loop
   var password = ""
   //choose a random character from the concatenated string for each position along the chosen password length
   for (var i = 0; i < passLength; i++) {
@@ -64,7 +65,7 @@ function generatePassword(passLength, characterTypes) {
 
   return password
 }
-//check password has at least 1 character from each true array
+//TODO check password has at least 1 character from each true confirm?
 
 // Write password to the #password input
 function writePassword() {
