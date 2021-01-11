@@ -1,15 +1,8 @@
-//make arrays with possible values 
-
-var lowerCase = "abcdefghijklmnopqrstuvwxyz"
-var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var numeric = "0123456789"
-var special = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~\\"
-
 //Prompt for password length
 function choosePassLength() {
   while (true) {
     var passLength = prompt("Please choose a password length between 8 and 128 characters.");
-
+    //validate input is between 8 and 128, otherwise while loop will prompt again
     if (isNaN(passLength) || passLength < 8 || passLength > 128) {
       alert("Invalid password length. Please choose a length between 8 and 128 characters.")
     }
@@ -19,6 +12,7 @@ function choosePassLength() {
   }
 }
 
+//confirming which characters to allow and then storing true or false values in the object called characterTypes
 function chooseCharacterTypes() {
   while (true) {
     var types = {
@@ -37,12 +31,40 @@ function chooseCharacterTypes() {
   }
 }
 
+//generate password
 function generatePassword(passLength, characterTypes) {
-  for (var i = 0; i < passLength; i++) {
-    //
+  //make arrays with possible values 
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz"
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  var numeric = "0123456789"
+  var special = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~\\"
 
+  //concat only characters that were chosen in confirm prompts
+  var allowedCharacters = ""
+  if (characterTypes.hasLowerCase) {
+    allowedCharacters = allowedCharacters.concat(lowerCase)
   }
+  if (characterTypes.hasUpperCase) {
+    allowedCharacters = allowedCharacters.concat(upperCase)
+  }
+  if (characterTypes.hasNumeric) {
+    allowedCharacters = allowedCharacters.concat(numeric)
+  }
+  if (characterTypes.hasSpecial) {
+    allowedCharacters = allowedCharacters.concat(special)
+  }
+
+  var password = ""
+  //choose a random character from the concatenated string for each position along the chosen password length
+  for (var i = 0; i < passLength; i++) {
+    var randomIndex = Math.floor(Math.random() * allowedCharacters.length);
+    var randomCharacter = allowedCharacters[randomIndex];
+    password = password.concat(randomCharacter);
+  }
+
+  return password
 }
+//check password has at least 1 character from each true array
 
 // Write password to the #password input
 function writePassword() {
