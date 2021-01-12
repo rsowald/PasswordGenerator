@@ -7,6 +7,7 @@ function choosePassLength() {
       alert("Invalid password length. Please choose a length between 8 and 128 characters.")
     }
     else {
+      console.log(passLength);
       return passLength;
     }
   }
@@ -27,6 +28,7 @@ function chooseCharacterTypes() {
       alert("You must choose at least one character type to continue.")
     }
     else {
+      console.log(types);
       return types;
     }
   }
@@ -38,7 +40,8 @@ function generatePassword(passLength, characterTypes) {
   var lowerCase = "abcdefghijklmnopqrstuvwxyz"
   var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   var numeric = "0123456789"
-  var special = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~\\"
+  //Make sure to check and escape characters that do not render in browser
+  var special = "!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~\\"
 
   //concat only characters that were chosen in confirm prompts
   var allowedCharacters = ""
@@ -54,15 +57,16 @@ function generatePassword(passLength, characterTypes) {
   if (characterTypes.hasSpecial) {
     allowedCharacters = allowedCharacters.concat(special)
   }
+  console.log(allowedCharacters);
   //make var to store password as it is built with for loop
   var password = ""
   //choose a random character from the concatenated string for each position along the chosen password length
   for (var i = 0; i < passLength; i++) {
     var randomIndex = Math.floor(Math.random() * allowedCharacters.length);
-    var randomCharacter = allowedCharacters[randomIndex];
+    var randomCharacter = allowedCharacters.charAt(randomIndex);
     password = password.concat(randomCharacter);
   }
-
+  console.log(password);
   return password
 }
 //TODO check password has at least 1 character from each true confirm?
