@@ -69,7 +69,6 @@ function generatePassword(passLength, characterTypes) {
   console.log(password);
   return password
 }
-//TODO check password has at least 1 character from each true confirm?
 
 // Write password to the #password input
 function writePassword() {
